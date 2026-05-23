@@ -34,7 +34,7 @@ export default function RootLayout({
       className={`${plusJakartaSans.variable} h-full antialiased`}
       suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full flex flex-row py-8 px-12">
         <ThemeProviders>
           <Sidebar />
           {children}

@@ -2,21 +2,24 @@
 
 /* color themes */
 :root {
-  --color-background-primary: #d6c1ac;
-  --color-background-card: #33332b;
-  --color-accent-interactive: #7097a6;
-  --color-accent-warm: #7e4621;
-  --color-neutral: #95b1bf;
+  /* --color- */
+  --color-background-primary: #e6e0d6;
+  --color-background-nav: #3f392f;
+  --color-background-card: #cfc7b8;
+  --color-accent-interactive: #4f6d7a;
+  --color-accent-warm: #8c4f3d;
+  --color-neutral: #2f2a25;
 
-  --color-text-primary: #332f26;
-  --color-text-card: #f2d7b2;
-  --color-text-accent-interactive: #28353d;
-  --color-text-accent-warm: #e8c7a6;
-  --color-text-neutral: #d7dee8;
+  --color-text-primary: #2f2a25;
+  --color-text-nav: #f2d7b2;
+  --color-text-card: #1f1b18;
+  --color-text-interactive: #ffffff;
+  --color-text-warm: #ffffff;
 }
 
 [data-theme="dark"] {
   --color-background-primary: #33332b;
+  --color-background-nav: #24201d;
   --color-background-card: #d6c1ac;
 
   --color-text-primary: #f2d7b2;
@@ -32,6 +35,7 @@ body {
   background: var(--color-background-primary);
   color: var(--color-text-primary);
   font-family: var(--font-inter), Arial, Helvetica, sans-serif;
+  height: 100%;
 }
 
 h1 {
@@ -41,6 +45,7 @@ h1 {
 
 h2 {
   font-family: var(--font-heading-sans), Arial, Helvetica, sans-serif;
+  font-weight: 700;
 }
 h3 {
   font-family: var(--font-heading-sans), Arial, Helvetica, sans-serif;
