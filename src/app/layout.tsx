@@ -4,6 +4,9 @@ import Sidebar from "@/components/navigation/Sidebar";
 
 import { Plus_Jakarta_Sans, Inter } from "next/font/google";
 import ThemeProviders from "@/providers/ThemeProviders";
+import SidebarProvider from "@/providers/SidebarProvider";
+import Header from "@/components/navigation/Header";
+import SidebarFull from "@/components/navigation/SidebarFull";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   variable: "--font-plus-jakarta-sans",
@@ -34,10 +37,16 @@ export default function RootLayout({
       className={`${plusJakartaSans.variable} h-full antialiased`}
       suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-row py-8 px-12">
+      <body className="min-h-full flex flex-col">
         <ThemeProviders>
-          <Sidebar />
-          {children}
+          <SidebarProvider>
+            <Header />
+            <SidebarFull />
+            <div className=" min-h-full flex flex-row py-8 px-12 ">
+              <Sidebar />
+              {children}
+            </div>
+          </SidebarProvider>
         </ThemeProviders>
       </body>
     </html>
