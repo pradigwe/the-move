@@ -7,6 +7,12 @@ import ThemeProviders from "@/providers/ThemeProviders";
 import SidebarProvider from "@/providers/SidebarProvider";
 import Header from "@/components/navigation/Header";
 import SidebarFull from "@/components/navigation/SidebarFull";
+import MoveDataProvider from "@/providers/MoveDataProvider";
+import { OnboardingProvider } from "@onboardjs/react";
+import { componentRegistry, steps } from "@/lib/onboarding";
+import OnboardingUI from "@/components/onboarding/OnboardingUI";
+import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
+import { GlobalStyles } from "@mui/material";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   variable: "--font-plus-jakarta-sans",
@@ -39,14 +45,28 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         <ThemeProviders>
-          <SidebarProvider>
-            <Header />
-            <SidebarFull />
-            <div className=" min-h-full flex flex-row py-8 px-12 ">
-              <Sidebar />
-              {children}
-            </div>
-          </SidebarProvider>
+          <AppRouterCacheProvider>
+            <GlobalStyles styles="@layer theme, base, mui, components, utilities;" />
+            <SidebarProvider>
+              <OnboardingProvider
+                steps={steps}
+                localStoragePersistence={{
+                  key: "onboardjs:my-onboarding",
+                }}
+                componentRegistry={componentRegistry}
+              >
+                <MoveDataProvider>
+                  <OnboardingUI />
+                  <Header />
+                  <SidebarFull />
+                  <div className=" min-h-full flex flex-row py-8 px-12 ">
+                    <Sidebar />
+                    {children}
+                  </div>
+                </MoveDataProvider>
+              </OnboardingProvider>
+            </SidebarProvider>
+          </AppRouterCacheProvider>
         </ThemeProviders>
       </body>
     </html>
