@@ -3,11 +3,12 @@
 import { componentRegistry } from "@/lib/onboarding";
 import { useOnboarding } from "@onboardjs/react";
 import { Box, Button, Fade, Modal } from "@mui/material";
-import { BasePayload } from "@onboardjs/core";
 import { ResetButton } from "./ResetButton";
+import useMoveData from "@/hooks/useMoveData";
 
 export default function OnboardingUI() {
   const { currentStep, state, previous, next, isCompleted } = useOnboarding();
+  const { onboardUser } = useMoveData();
 
   // checks if onboarding has already been completed
   if (state?.isCompleted) return <></>;
@@ -75,7 +76,15 @@ export default function OnboardingUI() {
                 Back
               </Button>
 
-              <Button onClick={() => next()} disabled={!isCurrentStepValid()}>
+              <Button
+                onClick={() => {
+                  if (currentStep?.id === "movePriorities") {
+                    onboardUser();
+                  }
+                  next();
+                }}
+                disabled={!isCurrentStepValid()}
+              >
                 {currentStep?.payload?.btnText
                   ? currentStep?.payload?.btnText
                   : // otherwise next will be displayed

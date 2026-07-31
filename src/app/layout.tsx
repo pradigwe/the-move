@@ -13,6 +13,8 @@ import { componentRegistry, steps } from "@/lib/onboarding";
 import OnboardingUI from "@/components/onboarding/OnboardingUI";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import { GlobalStyles } from "@mui/material";
+import { MoveOnboardingContext } from "@/types/onboarding";
+import { initialContext } from "@/data/initialContext";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   variable: "--font-plus-jakarta-sans",
@@ -54,6 +56,7 @@ export default function RootLayout({
                   key: "onboardjs:my-onboarding",
                 }}
                 componentRegistry={componentRegistry}
+                initialContext={initialContext as MoveOnboardingContext}
               >
                 <MoveDataProvider>
                   <OnboardingUI />

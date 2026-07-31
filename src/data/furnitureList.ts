@@ -1,3 +1,8 @@
+// convert items into objects with names and importance
+// estimated price not currenlty needed for MVP
+
+// accidently made an object furniture list need to convert to array.
+// and convert sections to array with objects
 export const furnitureList = {
   furniture: [
     "Mattress",

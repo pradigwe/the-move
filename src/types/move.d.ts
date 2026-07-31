@@ -1,42 +1,58 @@
 export type MoveDataTypes = {
-  checklist: ChecklistItem[];
-  movePlan: MoveSection[];
-  activityFeed: ActivityItem[];
-  moveGoal: MoveGoal;
+  user: User;
+  onboardUser: () => void;
+  deleteUser: () => void;
+  setSavingsGoal: (property: "total", amount: number) => void;
 };
 
+// a.k.a furniture/item list
 export type ChecklistItem = {
-  id: string;
   name: string;
 
-  category: "furniture" | "kitchen" | "bathroom" | "cleaning" | "utilities";
-  importance: "low" | "medium" | "high";
+  category:
+    | "furniture"
+    | "kitchen"
+    | "bathroom"
+    | "cleaning"
+    | "home_essentials"
+    | "decor"
+    | "miscellaneous";
+  // 0 is undefined
+  importance: 1 | 2 | 3 | 0;
 
-  estimatedPrice: number;
+  estimatedPrice: number | undefined;
   purchased: boolean;
 };
 
+export type ChecklistItemCategories =
+  | "furniture"
+  | "kitchen"
+  | "bathroom"
+  | "cleaning"
+  | "home_essentials"
+  | "decor"
+  | "miscellaneous";
+
 export type MoveSection = {
-  id: string;
+  id: number;
   title: string;
-  timeframe: string;
+  // timeframe is taken in days
+  timeframe: number;
   tasks: MoveTask[];
+  quotes: string[];
 };
 
 export type MoveTask = {
-  id: string;
   title: string;
   completed: boolean;
 };
 
 export type MoveGoal = {
   totalGoal: number;
-  currentSaved: number;
   breakdown: {
     rentBuffer: number;
     movingCosts: number;
-    furniture: number;
-    essentials: number;
+    furnitureTotal: number;
   };
 };
 
@@ -45,4 +61,17 @@ export type ActivityItem = {
   type: "purchase" | "goal" | "checklist";
   message: string;
   date: string;
+};
+
+export type User = {
+  savings: {
+    savingsGoal: number;
+    currentSaved: number;
+    remainingGoal: number;
+    progress: number;
+  };
+  movePlan: MoveSection[];
+  checklist: ChecklistItem[];
+  activityGoal: ActivityItem[];
+  moveGoal: MoveGoal;
 };
