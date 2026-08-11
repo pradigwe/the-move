@@ -95,7 +95,7 @@ export default function MoveDataProvider({
       } else {
       }
     } catch (error) {
-      console.log("ERROR:", error);
+      console.log("SET SAVINGS ERROR:", error);
     }
   };
 
@@ -114,7 +114,7 @@ export default function MoveDataProvider({
         };
       });
     } catch (error) {
-      console.log("ERROR:", error);
+      console.log("UPDATE SAVINGS ERROR:", error);
     }
   };
 
@@ -127,11 +127,30 @@ export default function MoveDataProvider({
         ...item,
         purchased: currentFurniture?.includes(item.name),
       })) as ChecklistItem[];
-    } catch (error) {}
+    } catch (error) {
+      console.log("CREATE CHECKLIST ERROR:", error);
+    }
+  };
+
+  const updateChecklist = (index: number, updatedItem: ChecklistItem) => {
+    try {
+      setUser((prev) => {
+        return {
+          ...prev,
+          checklist: prev.checklist.map((item) =>
+            item.id === index ? updatedItem : item,
+          ),
+        };
+      });
+    } catch (error) {
+      console.log("UPDATE CHECKLIST ERROR:", error);
+    }
   };
 
   return (
-    <MoveDataContext value={{ user, onboardUser, deleteUser, setSavingsGoal }}>
+    <MoveDataContext
+      value={{ user, onboardUser, deleteUser, setSavingsGoal, updateChecklist }}
+    >
       {children}
     </MoveDataContext>
   );

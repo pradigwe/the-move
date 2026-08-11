@@ -48,6 +48,11 @@ export const defaultChecklist: ChecklistItem[] = householdItems
       importance: item.importance as 1 | 2 | 3 | 0,
       estimatedPrice: undefined,
       purchased: false,
+      notes: "",
     })),
   )
-  .flat();
+  .flat()
+  .map((item, index) => ({
+    id: index + 1,
+    ...item,
+  }));

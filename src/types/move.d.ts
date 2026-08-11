@@ -3,10 +3,12 @@ export type MoveDataTypes = {
   onboardUser: () => void;
   deleteUser: () => void;
   setSavingsGoal: (property: "total", amount: number) => void;
+  updateChecklist: (index: number, updatedItem: ChecklistItem) => void;
 };
 
 // a.k.a furniture/item list
 export type ChecklistItem = {
+  id: number;
   name: string;
 
   category:
@@ -22,6 +24,7 @@ export type ChecklistItem = {
 
   estimatedPrice: number | undefined;
   purchased: boolean;
+  notes: string;
 };
 
 export type ChecklistItemCategories =
