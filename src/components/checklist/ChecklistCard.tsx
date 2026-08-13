@@ -1,13 +1,25 @@
 "use client";
 import { checklistCols } from "@/data/checklistSettings";
 import useMoveData from "@/hooks/useMoveData";
-import { User } from "@/types/move";
-import { DataGrid, GridRowId } from "@mui/x-data-grid";
+import {
+  DataGrid,
+  GridFilterModel,
+} from "@mui/x-data-grid";
+import { Dispatch, SetStateAction } from "react";
 
-export default function ChecklistCard() {
+type ChecklistCardProps = {
+  customFilter: GridFilterModel;
+  customSetFilter: Dispatch<SetStateAction<GridFilterModel>>;
+  debounce: number
+};
+
+export default function ChecklistCard({
+  customFilter,
+  customSetFilter,
+}: ChecklistCardProps) {
   const { user, updateChecklist } = useMoveData();
   return (
-    <div className="flex flex-col w-full max-w-full">
+    <div className="flex flex-col w-full max-w-full h-full">
       <DataGrid
         {...user.checklist}
         columns={checklistCols}
@@ -21,7 +33,15 @@ export default function ChecklistCard() {
           console.log("ERROR UPDATING ROW:", error);
         }}
         rowHeight={25}
+        showToolbar
+        disableColumnFilter
         disableColumnResize
+        autoPageSize
+        filterModel={customFilter}
+        onFilterModelChange={(newFilterModel) =>
+          customSetFilter(newFilterModel)
+        }
+        filterDebounceMs={200}
       />
     </div>
   );
