@@ -4,14 +4,11 @@ import {
   defaultPlan,
   defaultUser,
 } from "@/data/defaultOnboarding";
-import { householdItems } from "@/data/householdItems";
 import { createMoveGoal } from "@/lib/moveGoal/calculations";
 import {
-  ActivityItem,
   ChecklistItem,
+  ChecklistItemCategories,
   MoveDataTypes,
-  MoveGoal,
-  MoveSection,
   User,
 } from "@/types/move";
 import { MoveOnboardingContext } from "@/types/onboarding";
@@ -21,6 +18,10 @@ import { createContext, useEffect, useState } from "react";
 export const MoveDataContext = createContext<MoveDataTypes | undefined>(
   undefined,
 );
+
+export function generateUniqueID() {
+  return crypto.randomUUID();
+}
 
 export default function MoveDataProvider({
   children,
@@ -44,7 +45,7 @@ export default function MoveDataProvider({
     console.log("Local Storage Updated!");
   }, [user]);
 
-  const onboardUser = async () => {
+  const onboardUser = () => {
     try {
       console.log("Onboarding!");
       const session = createMoveGoal(
@@ -80,7 +81,7 @@ export default function MoveDataProvider({
     }
   };
 
-  const setSavingsGoal = async (property: "total", amount: number) => {
+  const setSavingsGoal = (property: "total", amount: number) => {
     try {
       if (property === "total") {
         setUser((prev) => {
@@ -99,7 +100,7 @@ export default function MoveDataProvider({
     }
   };
 
-  const updateSavingsProgress = async () => {
+  const updateSavingsProgress = () => {
     try {
       setUser((prev) => {
         const total = prev.savings.savingsGoal;
@@ -132,13 +133,13 @@ export default function MoveDataProvider({
     }
   };
 
-  const updateChecklist = (index: number, updatedItem: ChecklistItem) => {
+  const updateChecklist = (updatedItem: ChecklistItem) => {
     try {
       setUser((prev) => {
         return {
           ...prev,
           checklist: prev.checklist.map((item) =>
-            item.id === index ? updatedItem : item,
+            item.id === updatedItem.id ? updatedItem : item,
           ),
         };
       });

@@ -6,9 +6,8 @@ import {
   User,
 } from "@/types/move";
 import { quotes, sections, tasks } from "./moveSection";
-import { title } from "process";
-import { furnitureList } from "./furnitureList";
 import { householdItems } from "./householdItems";
+import { generateUniqueID } from "@/providers/MoveDataProvider";
 
 export const defaultUser: User = {
   savings: {
@@ -52,7 +51,7 @@ export const defaultChecklist: ChecklistItem[] = householdItems
     })),
   )
   .flat()
-  .map((item, index) => ({
-    id: index + 1,
+  .map((item) => ({
+    id: generateUniqueID(),
     ...item,
   }));

@@ -1,16 +1,13 @@
 "use client";
 import { checklistCols } from "@/data/checklistSettings";
 import useMoveData from "@/hooks/useMoveData";
-import {
-  DataGrid,
-  GridFilterModel,
-} from "@mui/x-data-grid";
+import { DataGrid, GridFilterModel } from "@mui/x-data-grid";
 import { Dispatch, SetStateAction } from "react";
 
 type ChecklistCardProps = {
   customFilter: GridFilterModel;
   customSetFilter: Dispatch<SetStateAction<GridFilterModel>>;
-  debounce: number
+  debounce: number;
 };
 
 export default function ChecklistCard({
@@ -26,14 +23,13 @@ export default function ChecklistCard({
         rows={user.checklist.map((item) => item)}
         getRowId={(row) => row.id}
         processRowUpdate={(newRow) => {
-          updateChecklist(newRow.id, newRow);
+          updateChecklist(newRow);
           return newRow;
         }}
         onProcessRowUpdateError={(error: Error) => {
           console.log("ERROR UPDATING ROW:", error);
         }}
         rowHeight={25}
-        showToolbar
         disableColumnFilter
         disableColumnResize
         autoPageSize
