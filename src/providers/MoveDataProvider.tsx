@@ -148,9 +148,45 @@ export default function MoveDataProvider({
     }
   };
 
+  const addChecklistItem = (
+    name: string,
+    category: ChecklistItemCategories,
+    importance: 1 | 2 | 3 | 0,
+    purchased: boolean,
+    notes: string,
+    price?: number,
+  ) => {
+    try {
+      const item: ChecklistItem = {
+        id: generateUniqueID(),
+        name,
+        category,
+        importance,
+        estimatedPrice: price ?? undefined,
+        purchased,
+        notes,
+      };
+      setUser((prev) => {
+        return {
+          ...prev,
+          checklist: [...prev.checklist, item],
+        };
+      });
+    } catch (error) {
+      console.log("ADD CHECKLIST ITEM ERROR:", error);
+    }
+  };
+
   return (
     <MoveDataContext
-      value={{ user, onboardUser, deleteUser, setSavingsGoal, updateChecklist }}
+      value={{
+        user,
+        onboardUser,
+        deleteUser,
+        setSavingsGoal,
+        updateChecklist,
+        addChecklistItem,
+      }}
     >
       {children}
     </MoveDataContext>

@@ -4,6 +4,14 @@ export type MoveDataTypes = {
   deleteUser: () => void;
   setSavingsGoal: (property: "total", amount: number) => void;
   updateChecklist: (updatedItem: ChecklistItem) => void;
+  addChecklistItem: (
+    name: string,
+    category: ChecklistItemCategories,
+    importance: 1 | 2 | 3 | 0,
+    purchased: boolean,
+    notes: string,
+    price?: number,
+  ) => void;
 };
 
 // a.k.a furniture/item list
