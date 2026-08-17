@@ -1,6 +1,6 @@
 "use client";
 
-import { furnitureList } from "@/data/furnitureList";
+import { furnitureList } from "@/data/onboarding/furnitureList";
 import { MoveGoal } from "@/types/move";
 import { MoveOnboardingContext } from "@/types/onboarding";
 

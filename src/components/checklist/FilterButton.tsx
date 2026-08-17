@@ -1,6 +1,6 @@
 "use client";
 
-import { buttonLabels } from "@/data/buttonLabels";
+import { buttonLabels } from "@/data/checklist/buttonLabels";
 import useMoveData from "@/hooks/useMoveData";
 import { Button, Chip, Modal, Slider, TextField } from "@mui/material";
 import { GridLogicOperator } from "@mui/x-data-grid";

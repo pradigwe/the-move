@@ -1,5 +1,5 @@
 "use client";
-import { checklistCols } from "@/data/checklistSettings";
+import { checklistCols } from "@/data/checklist/checklistSettings";
 import useMoveData from "@/hooks/useMoveData";
 import {
   DataGrid,

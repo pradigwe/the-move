@@ -3,7 +3,7 @@ import {
   defaultChecklist,
   defaultPlan,
   defaultUser,
-} from "@/data/defaultOnboarding";
+} from "@/data/onboarding/defaultOnboarding";
 import { createMoveGoal } from "@/lib/moveGoal/calculations";
 import {
   ChecklistItem,
@@ -199,7 +199,7 @@ export default function MoveDataProvider({
         setSavingsGoal,
         updateChecklist,
         addChecklistItem,
-        deleteChecklistItem
+        deleteChecklistItem,
       }}
     >
       {children}

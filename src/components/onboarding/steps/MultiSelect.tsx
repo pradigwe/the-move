@@ -1,4 +1,4 @@
-import { apartmentInclusionsList } from "@/data/furnitureList";
+import { apartmentInclusionsList } from "@/data/onboarding/furnitureList";
 import { Theme } from "@emotion/react";
 import {
   Box,

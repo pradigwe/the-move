@@ -14,7 +14,7 @@ import OnboardingUI from "@/components/onboarding/OnboardingUI";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import { GlobalStyles } from "@mui/material";
 import { MoveOnboardingContext } from "@/types/onboarding";
-import { initialContext } from "@/data/initialContext";
+import { initialContext } from "@/data/onboarding/initialContext";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   variable: "--font-plus-jakarta-sans",

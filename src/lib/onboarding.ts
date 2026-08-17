@@ -6,7 +6,7 @@ import InputStep from "@/components/onboarding/steps/Input";
 import MultiSelectStep from "@/components/onboarding/steps/MultiSelect";
 import SelectStep from "@/components/onboarding/steps/Select";
 import WelcomeStep from "@/components/onboarding/steps/Welcome";
-import { furnitureList } from "@/data/furnitureList";
+import { furnitureList } from "@/data/onboarding/furnitureList";
 import { OnboardingStep, StepComponentProps } from "@onboardjs/react";
 import { ComponentType } from "react";
 
