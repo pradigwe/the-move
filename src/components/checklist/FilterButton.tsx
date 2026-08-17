@@ -2,9 +2,8 @@
 
 import { buttonLabels } from "@/data/buttonLabels";
 import useMoveData from "@/hooks/useMoveData";
-import { Button, Modal, Slider, TextField } from "@mui/material";
+import { Button, Chip, Modal, Slider, TextField } from "@mui/material";
 import { GridLogicOperator } from "@mui/x-data-grid";
-import { getGridNumericOperators } from "@mui/x-data-grid";
 import { GridFilterModel } from "@mui/x-data-grid/models";
 import {
   ChangeEvent,
@@ -98,8 +97,9 @@ export default function FilterButton({
     const itemKey = `${field}-${value}`;
     return (
       <>
-        <Button
+        <Chip
           key={`${field}-${value}`}
+          label={label}
           onClick={() => {
             if (currentFilter === itemKey) {
               resetFilter();
@@ -117,10 +117,8 @@ export default function FilterButton({
               }));
             }
           }}
-          variant={currentFilter === itemKey ? "outlined" : "text"}
-        >
-          {label}
-        </Button>
+          variant={currentFilter === itemKey ? "filled" : "outlined"}
+        />
       </>
     );
   };
