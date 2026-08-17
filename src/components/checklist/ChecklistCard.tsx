@@ -1,18 +1,26 @@
 "use client";
 import { checklistCols } from "@/data/checklistSettings";
 import useMoveData from "@/hooks/useMoveData";
-import { DataGrid, GridFilterModel } from "@mui/x-data-grid";
+import {
+  DataGrid,
+  GridFilterModel,
+  GridRowSelectionModel,
+} from "@mui/x-data-grid";
 import { Dispatch, SetStateAction } from "react";
 
 type ChecklistCardProps = {
   customFilter: GridFilterModel;
   customSetFilter: Dispatch<SetStateAction<GridFilterModel>>;
+  customRowSelection: GridRowSelectionModel;
+  customSetRowSelection: Dispatch<SetStateAction<GridRowSelectionModel>>;
   debounce: number;
 };
 
 export default function ChecklistCard({
   customFilter,
   customSetFilter,
+  customRowSelection,
+  customSetRowSelection,
 }: ChecklistCardProps) {
   const { user, updateChecklist } = useMoveData();
   return (
@@ -32,11 +40,18 @@ export default function ChecklistCard({
         rowHeight={25}
         disableColumnFilter
         disableColumnResize
+        disableRowSelectionOnClick
+        checkboxSelection
         autoPageSize
         filterModel={customFilter}
         onFilterModelChange={(newFilterModel) =>
           customSetFilter(newFilterModel)
         }
+        rowSelectionModel={customRowSelection}
+        onRowSelectionModelChange={(newRowSelection) => {
+          customSetRowSelection(newRowSelection);
+          console.log("Rows:", customRowSelection);
+        }}
         filterDebounceMs={200}
       />
     </div>

@@ -177,6 +177,19 @@ export default function MoveDataProvider({
     }
   };
 
+  const deleteChecklistItem = (id: string) => {
+    try {
+      setUser((prev) => {
+        return {
+          ...prev,
+          checklist: prev.checklist.filter((item) => item.id !== id),
+        };
+      });
+    } catch (error) {
+      console.log("DELETE CHECKLIST ITEM ERROR:", error);
+    }
+  };
+
   return (
     <MoveDataContext
       value={{
@@ -186,6 +199,7 @@ export default function MoveDataProvider({
         setSavingsGoal,
         updateChecklist,
         addChecklistItem,
+        deleteChecklistItem
       }}
     >
       {children}

@@ -12,6 +12,7 @@ export type MoveDataTypes = {
     notes: string,
     price?: number,
   ) => void;
+  deleteChecklistItem: (id: string) => void;
 };
 
 // a.k.a furniture/item list
