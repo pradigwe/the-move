@@ -1,5 +1,28 @@
-import { GridColDef } from "@mui/x-data-grid";
-import { Star } from "lucide-react";
+import InputNumberInterval from "@/lib/checklist/MultiValueOpertor";
+import { GridColDef, GridFilterOperator } from "@mui/x-data-grid";
+
+const priceOperator: GridFilterOperator<any, number>[] = [
+  {
+    label: "Between",
+    value: "between",
+    getApplyFilterFn: (filterItem) => {
+      if (!Array.isArray(filterItem.value) || filterItem.value.length !== 2) {
+        return null;
+      }
+      if (filterItem.value[0] === null || filterItem.value[1] === null) {
+        return null;
+      }
+      return (value) => {
+        return (
+          value !== null &&
+          filterItem.value[0] <= value &&
+          value <= filterItem.value[1]
+        );
+      };
+    },
+    InputComponent: InputNumberInterval,
+  },
+];
 
 export const checklistCols: GridColDef[] = [
   {
@@ -61,6 +84,7 @@ export const checklistCols: GridColDef[] = [
       return `$${value.toLocaleString()}`;
     },
     editable: true,
+    filterOperators: priceOperator,
   },
 
   {

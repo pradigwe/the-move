@@ -1,12 +1,9 @@
 "use client";
 import AddItemButton from "@/components/checklist/AddItemButton";
 import ChecklistCard from "@/components/checklist/ChecklistCard";
+import FilterButton from "@/components/checklist/FilterButton";
 import SearchBar from "@/components/checklist/SearchBar";
-import {
-  GridFilterModel,
-  GridLogicOperator,
-  useGridApiRef,
-} from "@mui/x-data-grid";
+import { GridFilterModel, GridLogicOperator } from "@mui/x-data-grid";
 import React from "react";
 
 export default function Checklist() {
@@ -21,7 +18,10 @@ export default function Checklist() {
       <SearchBar triggerSearchFilter={setFilterModel} />
       <div className="flex flex-row justify-stretch">
         <h2 className="flex-3/4">Checklist</h2>
-        <AddItemButton />
+        <div className="flex flex-row">
+          <FilterButton triggerSearchFilter={setFilterModel} />
+          <AddItemButton />
+        </div>
       </div>
       <ChecklistCard
         customFilter={filterModel}
