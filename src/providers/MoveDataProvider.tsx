@@ -9,6 +9,7 @@ import {
   ChecklistItem,
   ChecklistItemCategories,
   MoveDataTypes,
+  MoveTask,
   User,
 } from "@/types/move";
 import { MoveOnboardingContext } from "@/types/onboarding";
@@ -47,7 +48,8 @@ export default function MoveDataProvider({
 
   const onboardUser = () => {
     try {
-      console.log("Onboarding!");
+      const { moveDate } = state?.context
+        .flowData as MoveOnboardingContext["flowData"];
       const session = createMoveGoal(
         state?.context.flowData as MoveOnboardingContext["flowData"],
       );
@@ -57,7 +59,10 @@ export default function MoveDataProvider({
       setUser({
         ...user,
         moveGoal: session,
-        movePlan: defaultPlan,
+        movePlan: {
+          moveDate: state?.context.flowData.moveDate,
+          sections: defaultPlan,
+        },
         checklist: sessionChecklist,
       });
       setSavingsGoal("total", session.totalGoal);
@@ -190,6 +195,55 @@ export default function MoveDataProvider({
     }
   };
 
+  const getDaysToMove = () => {
+    try {
+      // debating between getting count of days vs 1 day 1 month
+      const futureDate = new Date(user.movePlan.moveDate);
+      const currentDate = new Date();
+
+      if (!futureDate || !currentDate) {
+        return 0;
+      }
+
+      const millisecondDiff = futureDate.getTime() - currentDate.getTime();
+      const days = Math.round(millisecondDiff / (24 * 60 * 60 * 1000));
+      return days;
+    } catch (error) {
+      console.log("GET DAYS TO MOVE IN ERROR:", error);
+      return 0;
+    }
+  };
+
+  const updateMoveTask = (
+    sectionId: string,
+    taskId: string,
+    newTask: MoveTask,
+  ) => {
+    try {
+      console.log("Updating task:", taskId);
+      setUser((prev) => {
+        return {
+          ...prev,
+          movePlan: {
+            ...prev.movePlan,
+            sections: prev.movePlan.sections.map((section) =>
+              section.id === sectionId
+                ? {
+                    ...section,
+                    tasks: section.tasks.map((task) =>
+                      task.id === taskId ? newTask : task,
+                    ),
+                  }
+                : section,
+            ),
+          },
+        };
+      });
+    } catch (error) {
+      console.log("UPDATE MOVE TASK ERROR:", error);
+    }
+  };
+
   return (
     <MoveDataContext
       value={{
@@ -200,9 +254,38 @@ export default function MoveDataProvider({
         updateChecklist,
         addChecklistItem,
         deleteChecklistItem,
+        getDaysToMove,
+        updateMoveTask,
       }}
     >
       {children}
     </MoveDataContext>
   );
 }
+
+/*const updateMoveTask = (
+    sectionId: string,
+    taskId: string,
+    newTask: MoveTask,
+  ) => {
+    try {
+      const newSection: MoveSection = user.movePlan.sections.find((section) => section.id === sectionId)!
+      setUser((prev) => {
+        return {
+          ...prev,
+          movePlan: {
+            ...prev.movePlan,
+            sections: prev.movePlan.sections.map((section) =>
+              section.id === sectionId
+                ? section.tasks.map((task) =>
+                    
+                  )
+                : section,
+            ),
+          },
+        };
+      });
+    } catch (error) {
+      console.log("UPDATE MOVE TASK ERROR:", error);
+    }
+  };*/

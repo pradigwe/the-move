@@ -13,6 +13,12 @@ export type MoveDataTypes = {
     price?: number,
   ) => void;
   deleteChecklistItem: (id: string) => void;
+  getDaysToMove: () => number;
+  updateMoveTask: (
+    sectionId: string,
+    taskId: string,
+    newTask: MoveTask,
+  ) => void;
 };
 
 // a.k.a furniture/item list
@@ -46,7 +52,7 @@ export type ChecklistItemCategories =
   | "miscellaneous";
 
 export type MoveSection = {
-  id: number;
+  id: string;
   title: string;
   // timeframe is taken in days
   timeframe: number;
@@ -55,6 +61,7 @@ export type MoveSection = {
 };
 
 export type MoveTask = {
+  id: string;
   title: string;
   completed: boolean;
 };
@@ -82,7 +89,10 @@ export type User = {
     remainingGoal: number;
     progress: number;
   };
-  movePlan: MoveSection[];
+  movePlan: {
+    moveDate: string;
+    sections: MoveSection[];
+  };
   checklist: ChecklistItem[];
   activityGoal: ActivityItem[];
   moveGoal: MoveGoal;

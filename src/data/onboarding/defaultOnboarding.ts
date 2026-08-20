@@ -16,7 +16,10 @@ export const defaultUser: User = {
     remainingGoal: 0,
     progress: 0,
   },
-  movePlan: [],
+  movePlan: {
+    moveDate: "01/01/2000",
+    sections: [],
+  },
   checklist: [],
   activityGoal: [],
   moveGoal: {
@@ -30,13 +33,18 @@ export const defaultUser: User = {
 };
 
 export const defaultPlan: MoveSection[] = sections.map((section) => ({
-  id: section.id,
+  id: generateUniqueID(),
   title: section.title,
   timeframe: section.timeframe,
   tasks: tasks
-    .find((task) => task.id === section.id)
-    ?.tasks.map((task) => ({ title: task, completed: false })) as MoveTask[],
-  quotes: quotes.find((quote) => quote.id === section.id)?.quotes || [],
+    .find((task) => task.timeframe === section.timeframe)
+    ?.tasks.map((task) => ({
+      id: generateUniqueID(),
+      title: task,
+      completed: false,
+    })) as MoveTask[],
+  quotes:
+    quotes.find((quote) => quote.timeframe === section.timeframe)?.quotes || [],
 }));
 
 export const defaultChecklist: ChecklistItem[] = householdItems
