@@ -13,6 +13,7 @@ export type MoveDataTypes = {
     price?: number,
   ) => void;
   deleteChecklistItem: (id: string) => void;
+  updateMoveDate: (updateDate: string) => void;
   getDaysToMove: () => number;
   updateMoveTask: (
     sectionId: string,

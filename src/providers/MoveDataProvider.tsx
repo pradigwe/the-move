@@ -66,7 +66,6 @@ export default function MoveDataProvider({
         checklist: sessionChecklist,
       });
       setSavingsGoal("total", session.totalGoal);
-      updateSavingsProgress();
     } catch (error) {
       console.log("ONBOARDING ERROR:", error);
     }
@@ -98,6 +97,7 @@ export default function MoveDataProvider({
             },
           };
         });
+        updateSavingsProgress();
       } else {
       }
     } catch (error) {
@@ -214,6 +214,22 @@ export default function MoveDataProvider({
     }
   };
 
+  const updateMoveDate = (updatedDate: string) => {
+    try {
+      setUser((prev) => {
+        return {
+          ...prev,
+          movePlan: {
+            ...prev.movePlan,
+            moveDate: updatedDate,
+          },
+        };
+      });
+    } catch (error) {
+      console.log("UPDATE MOVE DATE ERROR:", error);
+    }
+  };
+
   const updateMoveTask = (
     sectionId: string,
     taskId: string,
@@ -254,6 +270,7 @@ export default function MoveDataProvider({
         updateChecklist,
         addChecklistItem,
         deleteChecklistItem,
+        updateMoveDate,
         getDaysToMove,
         updateMoveTask,
       }}
