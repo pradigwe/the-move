@@ -4,18 +4,13 @@ import EditGoalButton from "./EditGoalButton";
 export default function MoveGoalCard() {
   const { user } = useMoveData();
   const getFullDate = () => {
-    const stringDate = user.movePlan.moveDate;
-    const dateArray = new Date(stringDate).toDateString().split(" ");
-
-    return (
-      dateArray[0] +
-      ", " +
-      dateArray[1] +
-      " " +
-      dateArray[2] +
-      ", " +
-      dateArray[3]
-    );
+    const stringDate = user.movePlan.moveDate.split("-");
+    const numberDate = stringDate.map(Number);
+    const date = new Date(numberDate[0], numberDate[1] - 1, numberDate[2])
+      .toDateString()
+      .split(" ");
+    console.log(date);
+    return date[0] + ", " + date[1] + " " + date[2] + ", " + date[3];
   };
   return (
     <div>
