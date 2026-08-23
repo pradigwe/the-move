@@ -9,6 +9,16 @@ export const savingsCols: GridColDef[] = [
     editable: false,
   },
   {
+    field: "message",
+    headerName: "Activity",
+    type: "string",
+    editable: false,
+    resizable: false,
+    sortable: false,
+    filterable: false,
+    flex: 0.6,
+  },
+  {
     field: "totalPrice",
     headerName: "Amount",
     type: "number",
@@ -23,16 +33,6 @@ export const savingsCols: GridColDef[] = [
     hideable: false,
     filterable: false,
     flex: 0.2,
-  },
-  {
-    field: "message",
-    headerName: "Description",
-    type: "string",
-    editable: false,
-    resizable: false,
-    sortable: false,
-    filterable: false,
-    flex: 0.6,
   },
   {
     field: "date",
