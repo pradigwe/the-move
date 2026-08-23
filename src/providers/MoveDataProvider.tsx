@@ -6,6 +6,7 @@ import {
 } from "@/data/onboarding/defaultOnboarding";
 import { createMoveGoal } from "@/lib/moveGoal/calculations";
 import {
+  ActivityItem,
   ChecklistItem,
   ChecklistItemCategories,
   MoveDataTypes,
@@ -105,15 +106,16 @@ export default function MoveDataProvider({
     }
   };
 
-  const updateSavingsProgress = () => {
+  const updateSavingsProgress = (amount?: number) => {
     try {
       setUser((prev) => {
         const total = prev.savings.savingsGoal;
-        const current = prev.savings.currentSaved;
+        const current = prev.savings.currentSaved + (amount ?? 0);
         return {
           ...prev,
           savings: {
             ...prev.savings,
+            currentSaved: current,
             remainingGoal: total - current,
             progress: Math.round((current / total) * 100),
           },
@@ -148,6 +150,13 @@ export default function MoveDataProvider({
           ),
         };
       });
+      if (updatedItem.purchased) {
+        addActivity(
+          "purchase",
+          `Purchased ${updatedItem.name}`,
+          updatedItem.estimatedPrice,
+        );
+      }
     } catch (error) {
       console.log("UPDATE CHECKLIST ERROR:", error);
     }
@@ -260,6 +269,30 @@ export default function MoveDataProvider({
     }
   };
 
+  const addActivity = (
+    type: "purchase" | "goal" | "checklist" | "savings",
+    message: string,
+    totalPrice?: number,
+  ) => {
+    try {
+      const activity: ActivityItem = {
+        id: generateUniqueID(),
+        type,
+        message,
+        date: new Date().toISOString().split("T")[0],
+        totalPrice: totalPrice ?? null,
+      };
+      setUser((prev) => {
+        return {
+          ...prev,
+          activityGoal: [...prev.activityGoal, activity],
+        };
+      });
+    } catch (error) {
+      console.log("ADD ACTIVITY ERROR:", error);
+    }
+  };
+
   return (
     <MoveDataContext
       value={{
@@ -267,42 +300,17 @@ export default function MoveDataProvider({
         onboardUser,
         deleteUser,
         setSavingsGoal,
+        updateSavingsProgress,
         updateChecklist,
         addChecklistItem,
         deleteChecklistItem,
         updateMoveDate,
         getDaysToMove,
         updateMoveTask,
+        addActivity,
       }}
     >
       {children}
     </MoveDataContext>
   );
 }
-
-/*const updateMoveTask = (
-    sectionId: string,
-    taskId: string,
-    newTask: MoveTask,
-  ) => {
-    try {
-      const newSection: MoveSection = user.movePlan.sections.find((section) => section.id === sectionId)!
-      setUser((prev) => {
-        return {
-          ...prev,
-          movePlan: {
-            ...prev.movePlan,
-            sections: prev.movePlan.sections.map((section) =>
-              section.id === sectionId
-                ? section.tasks.map((task) =>
-                    
-                  )
-                : section,
-            ),
-          },
-        };
-      });
-    } catch (error) {
-      console.log("UPDATE MOVE TASK ERROR:", error);
-    }
-  };*/

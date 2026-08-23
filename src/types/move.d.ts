@@ -3,6 +3,7 @@ export type MoveDataTypes = {
   onboardUser: () => void;
   deleteUser: () => void;
   setSavingsGoal: (property: "total", amount: number) => void;
+  updateSavingsProgress: (amount?: number) => void;
   updateChecklist: (updatedItem: ChecklistItem) => void;
   addChecklistItem: (
     name: string,
@@ -19,6 +20,11 @@ export type MoveDataTypes = {
     sectionId: string,
     taskId: string,
     newTask: MoveTask,
+  ) => void;
+  addActivity: (
+    type: "purchase" | "goal" | "checklist" | "savings",
+    message: string,
+    totalPrice?: number,
   ) => void;
 };
 
@@ -78,9 +84,10 @@ export type MoveGoal = {
 
 export type ActivityItem = {
   id: string;
-  type: "purchase" | "goal" | "checklist";
+  type: "purchase" | "goal" | "checklist" | "savings";
   message: string;
   date: string;
+  totalPrice: number | null;
 };
 
 export type User = {
