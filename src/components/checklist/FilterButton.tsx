@@ -125,7 +125,9 @@ export default function FilterButton({
 
   return (
     <div>
-      <Button onClick={handleOpen} variant="contained">Filter</Button>
+      <Button onClick={handleOpen} variant="contained">
+        Filter
+      </Button>
       <Modal open={open} onClose={handleClose}>
         <div className="absolute bg-(--color-text-nav) w-1/3 h-2/3 top-1/2 left-1/2 -translate-1/2 flex flex-col items-center justify-center ">
           <section>

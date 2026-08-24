@@ -3,6 +3,7 @@
 import SavingsActivityFeed from "@/components/savings/ActivityFeed";
 import AddSavingsButton from "@/components/savings/AddSavingsButton";
 import MoveGoalCard from "@/components/savings/MoveGoalCard";
+import RecentHistoryCard from "@/components/savings/RecentHistoryCard";
 import MoveProgressCard from "@/components/shared/MoveProgressCard";
 
 export default function Savings() {
@@ -17,6 +18,7 @@ export default function Savings() {
         <div className="flex-1/2">
           <AddSavingsButton />
           <SavingsActivityFeed />
+          <RecentHistoryCard />
         </div>
       </div>
     </div>

@@ -9,7 +9,6 @@ export default function MoveGoalCard() {
     const date = new Date(numberDate[0], numberDate[1] - 1, numberDate[2])
       .toDateString()
       .split(" ");
-    console.log(date);
     return date[0] + ", " + date[1] + " " + date[2] + ", " + date[3];
   };
   return (
