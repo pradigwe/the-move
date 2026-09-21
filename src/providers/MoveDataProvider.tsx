@@ -49,8 +49,6 @@ export default function MoveDataProvider({
 
   const onboardUser = () => {
     try {
-      const { moveDate } = state?.context
-        .flowData as MoveOnboardingContext["flowData"];
       const session = createMoveGoal(
         state?.context.flowData as MoveOnboardingContext["flowData"],
       );
@@ -59,6 +57,7 @@ export default function MoveDataProvider({
       // set move goal data to moveGoal property
       setUser({
         ...user,
+        name: state?.context.flowData.name,
         moveGoal: session,
         movePlan: {
           moveDate: state?.context.flowData.moveDate,

@@ -1,5 +1,5 @@
 "use client";
-import { createContext, PropsWithChildren, useState } from "react";
+import { createContext, useState } from "react";
 
 // declare props to be used as one argument/object
 type SidebarProviderTypes = {

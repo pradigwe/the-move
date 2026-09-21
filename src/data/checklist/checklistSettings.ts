@@ -1,7 +1,8 @@
 import InputNumberInterval from "@/lib/checklist/MultiValueOpertor";
+import { ChecklistItem } from "@/types/move";
 import { GridColDef, GridFilterOperator } from "@mui/x-data-grid";
 
-const priceOperator: GridFilterOperator<any, number>[] = [
+const priceOperator: GridFilterOperator<ChecklistItem, number>[] = [
   {
     label: "Between",
     value: "between",
@@ -24,7 +25,7 @@ const priceOperator: GridFilterOperator<any, number>[] = [
   },
 ];
 
-export const checklistCols: GridColDef[] = [
+export const checklistCols: GridColDef<ChecklistItem>[] = [
   {
     field: "purchased",
     headerName: "✔",

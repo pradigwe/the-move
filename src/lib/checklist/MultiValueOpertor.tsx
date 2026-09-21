@@ -2,7 +2,7 @@
 import Box from "@mui/material/Box";
 import TextField, { TextFieldProps } from "@mui/material/TextField";
 import { GridFilterInputValueProps, useGridRootProps } from "@mui/x-data-grid";
-import React from "react";
+import React, { useEffect, useEffectEvent, useState } from "react";
 
 export default function InputNumberInterval(props: GridFilterInputValueProps) {
   const rootProps = useGridRootProps();
@@ -12,18 +12,18 @@ export default function InputNumberInterval(props: GridFilterInputValueProps) {
   const [filterValueState, setFilterValueState] = React.useState<
     [string, string]
   >(item.value ?? ["", ""]);
-  const [applying, setIsApplying] = React.useState(false);
+  const [applying, setIsApplying] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     return () => {
       clearTimeout(filterTimeout.current);
     };
   }, []);
 
-  React.useEffect(() => {
+  useEffectEvent(() => {
     const itemValue = item.value ?? [undefined, undefined];
     setFilterValueState(itemValue);
-  }, [item.value]);
+  });
 
   const updateFilterValue = (lowerBound: string, upperBound: string) => {
     clearTimeout(filterTimeout.current);
@@ -35,6 +35,7 @@ export default function InputNumberInterval(props: GridFilterInputValueProps) {
       applyValue({ ...item, value: [lowerBound, upperBound] });
     }, rootProps.filterDebounceMs);
   };
+  console.log("Applying value:", applying);
 
   const handleUpperFilterChange: TextFieldProps["onChange"] = (event) => {
     const newUpperBound = event.target.value;

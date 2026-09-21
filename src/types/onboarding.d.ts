@@ -1,5 +1,10 @@
 import { OnboardingContext } from "@onboardjs/core";
-import { EngineState } from "@onboardjs/core";
+
+export type Option = {
+  id: string;
+  value: string;
+  label: string;
+};
 
 export interface MoveOnboardingContext extends OnboardingContext {
   version: string;

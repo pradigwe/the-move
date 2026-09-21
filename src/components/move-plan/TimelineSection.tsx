@@ -4,7 +4,7 @@ import useMoveData from "@/hooks/useMoveData";
 import { generateUniqueID } from "@/providers/MoveDataProvider";
 import { MoveTask } from "@/types/move";
 import { Button, Checkbox, FormControlLabel } from "@mui/material";
-import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
+import { ChangeEvent, Dispatch, SetStateAction } from "react";
 
 type TimelineSectionProps = {
   id: string;

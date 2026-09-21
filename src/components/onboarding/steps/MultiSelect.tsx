@@ -1,19 +1,14 @@
-import { apartmentInclusionsList } from "@/data/onboarding/furnitureList";
-import { Theme } from "@emotion/react";
 import {
   Box,
   Chip,
   FormControl,
   ListSubheader,
-  Menu,
   MenuItem,
-  OutlinedInput,
   Select,
   SelectChangeEvent,
 } from "@mui/material";
 import { BasePayload } from "@onboardjs/core";
 import { StepComponentProps, useOnboarding } from "@onboardjs/react";
-import { useState } from "react";
 
 export default function MultiSelectStep({
   payload,

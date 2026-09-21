@@ -1,5 +1,5 @@
 import useMoveData from "@/hooks/useMoveData";
-import { useEffect, useState } from "react";
+import { useEffectEvent, useState } from "react";
 
 export default function RecentHistoryCard() {
   const { user } = useMoveData();
@@ -50,9 +50,9 @@ export default function RecentHistoryCard() {
   const [timePeriods, setTimePeriods] =
     useState<{ period: string; ids: string[] }[]>(generatePeriods());
 
-  useEffect(() => {
+  useEffectEvent(() => {
     setTimePeriods(generatePeriods());
-  }, [user.activityGoal]);
+  });
 
   // create component call of MONTH YEAR: $total
   // fetch totalprice from user add it all together using .reduce()

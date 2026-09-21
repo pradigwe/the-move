@@ -14,6 +14,7 @@ export default function Plan() {
       // eventually returning one object
       .reduce((a, b) => (a.timeframe > b.timeframe ? a : b)).id,
   );
+
   const generateRandomQuote = () => {
     const quotes = user.movePlan.sections.find(
       (section) => section.id === currentSection,
@@ -21,6 +22,9 @@ export default function Plan() {
     const randomIndex = Math.floor(Math.random() * (quotes?.length ?? 0));
     return quotes[randomIndex];
   };
+
+  const [quote] = useState(() => generateRandomQuote());
+
   return (
     <div className="w-full h-auto">
       <h2>Plan</h2>
@@ -39,7 +43,7 @@ export default function Plan() {
           ))}
         </FormGroup>
       </div>
-      <p>{generateRandomQuote()}</p>
+      <p>{quote}</p>
     </div>
   );
 }

@@ -35,11 +35,11 @@ export default function SelectStep({
   // but goes back to select a different option that has a different
   // setup route
   // this function resets that connecting field
-  const resetConnectedField = () => {
-    const connectedField = state?.context.flowData[payload.connectedField];
-    const type = typeof connectedField;
-    console.log("Connected Field Type", type);
-  };
+  // const resetConnectedField = () => {
+  //   const connectedField = state?.context.flowData[payload.connectedField];
+  //   const type = typeof connectedField;
+  //   console.log("Connected Field Type", type);
+  // };
 
   return (
     <div>

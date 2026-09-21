@@ -1,6 +1,5 @@
 "use client";
-import OnboardingUI from "@/components/onboarding/OnboardingUI";
-import useMoveData from "@/hooks/useMoveData";
+
 import { useOnboarding } from "@onboardjs/react";
 
 export default function Dashboard() {

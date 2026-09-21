@@ -64,7 +64,7 @@ export default function EditGoalButton() {
             />
           </div>
           <Button
-            onClick={(value) => {
+            onClick={() => {
               handleUpdateGoal();
               handleClose();
             }}

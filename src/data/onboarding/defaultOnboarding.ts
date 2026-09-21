@@ -10,6 +10,7 @@ import { householdItems } from "./householdItems";
 import { generateUniqueID } from "@/providers/MoveDataProvider";
 
 export const defaultUser: User = {
+  name: "",
   savings: {
     savingsGoal: 0,
     currentSaved: 0,

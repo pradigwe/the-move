@@ -25,7 +25,6 @@ export default function InputStep({
     state?.context.flowData[payload.fieldId] === undefined
       ? (payload.defaultValue ?? "")
       : Number(state?.context.flowData[payload.fieldId]);
-  0;
   // handles context updates for number values
   const handleNumberInput = (value: number) => {
     updateContext({

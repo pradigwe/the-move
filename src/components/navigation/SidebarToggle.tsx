@@ -10,13 +10,13 @@ import {
 import { useEffect } from "react";
 import useSidebar from "@/hooks/useSidebar";
 
-function SidebarIcon(toggled: boolean, type: "menu" | "toggle") {
-  if (toggled) {
-    return type === "menu" ? <Menu /> : <ChevronsRight />;
-  } else {
-    return type === "menu" ? <CircleX /> : <ChevronsLeft />;
-  }
-}
+// function SidebarIcon(toggled: boolean, type: "menu" | "toggle") {
+//   if (toggled) {
+//     return type === "menu" ? <Menu /> : <ChevronsRight />;
+//   } else {
+//     return type === "menu" ? <CircleX /> : <ChevronsLeft />;
+//   }
+// }
 
 export default function SidebarToggle({
   className = "",

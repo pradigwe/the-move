@@ -2,7 +2,7 @@
 
 import { componentRegistry } from "@/lib/onboarding";
 import { useOnboarding } from "@onboardjs/react";
-import { Box, Button, Fade, Modal } from "@mui/material";
+import { Box, Button, Modal } from "@mui/material";
 import { ResetButton } from "./ResetButton";
 import useMoveData from "@/hooks/useMoveData";
 
@@ -10,8 +10,8 @@ export default function OnboardingUI() {
   const { currentStep, state, previous, next, isCompleted } = useOnboarding();
   const { onboardUser } = useMoveData();
 
-  // checks if onboarding has already been completed
-  if (state?.isCompleted) return <></>;
+  // checks if state exists or if onboarding has already been completed
+  if (state?.isCompleted || !state) return <></>;
 
   // displays the component of the current step
   const Component =
@@ -59,8 +59,8 @@ export default function OnboardingUI() {
           <div className="">
             <Component
               payload={currentStep?.payload}
-              context={state?.context!}
-              coreContext={state?.context!}
+              context={state.context}
+              coreContext={state.context}
               onDataChange={() => {}}
             />
 

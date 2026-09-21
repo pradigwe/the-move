@@ -91,6 +91,7 @@ export type ActivityItem = {
 };
 
 export type User = {
+  name: string;
   savings: {
     savingsGoal: number;
     currentSaved: number;

@@ -9,7 +9,7 @@ import {
   ChangeEvent,
   Dispatch,
   SetStateAction,
-  useEffect,
+  useEffectEvent,
   useState,
 } from "react";
 
@@ -30,7 +30,9 @@ export default function FilterButton({
   const [currentFilter, setCurrentFilter] = useState<string>("");
 
   // Price range slider variables
-  const [maxValue, setMaxValue] = useState<number>(500);
+  const [maxValue] = useState<number>(
+    Math.max(...user.checklist.map((item) => item.estimatedPrice ?? 0)),
+  );
   const [priceValue, setPriceValue] = useState<number[]>([0, maxValue]);
 
   const handlePriceValueChange = (event: Event, newValue: number[]) => {
@@ -53,12 +55,12 @@ export default function FilterButton({
     const value = Math.max(
       ...user.checklist.map((item) => item.estimatedPrice ?? 0),
     );
-    setMaxValue(value);
+    return value;
   };
   // updates max value of range every time user updates the price of a checklist item
-  useEffect(() => {
+  useEffectEvent(() => {
     findMaxChecklistValue();
-  }, [user.checklist]);
+  });
 
   const handlePriceFilter = () => {
     const field = "estimatedPrice";

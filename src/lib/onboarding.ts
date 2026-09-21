@@ -7,13 +7,10 @@ import MultiSelectStep from "@/components/onboarding/steps/MultiSelect";
 import SelectStep from "@/components/onboarding/steps/Select";
 import WelcomeStep from "@/components/onboarding/steps/Welcome";
 import { furnitureList } from "@/data/onboarding/furnitureList";
-import { OnboardingStep, StepComponentProps } from "@onboardjs/react";
-import { ComponentType } from "react";
-
-type OnboardingComponent = ComponentType<StepComponentProps<any>>;
+import { OnboardingStep, StepComponentRegistry } from "@onboardjs/react";
 
 // Record allows for X to have a set of properties of OnboardingComponent type
-export const componentRegistry: Record<string, OnboardingComponent> = {
+export const componentRegistry: StepComponentRegistry = {
   WelcomeStep,
   InputStep,
   SelectStep,

@@ -1,5 +1,5 @@
 "use client";
-import { CircleDashed, LayoutDashboard, LucideProvider } from "lucide-react";
+import { CircleDashed, LucideProvider } from "lucide-react";
 import Link from "next/link";
 import { navIcons } from "@/data/navigation";
 

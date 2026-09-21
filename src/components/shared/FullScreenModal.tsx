@@ -1,5 +1,4 @@
 "use client";
-type FullScreenModalProps = {};
 
 export default function FullScreenModal({
   children,
