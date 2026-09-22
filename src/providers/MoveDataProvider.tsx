@@ -15,7 +15,13 @@ import {
 } from "@/types/move";
 import { MoveOnboardingContext } from "@/types/onboarding";
 import { useOnboarding } from "@onboardjs/react";
-import { createContext, useEffect, useEffectEvent, useState } from "react";
+import {
+  createContext,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 
 export const MoveDataContext = createContext<MoveDataTypes | undefined>(
   undefined,
@@ -319,9 +325,11 @@ export default function MoveDataProvider({
 
   // checks if client is mounted before returning any data
   const [isClientMounted, setIsClientMounted] = useState<boolean>(false);
-  useEffectEvent(() => {
-    setIsClientMounted(true);
-  });
+  const ref = useRef(true);
+
+  useLayoutEffect(() => {
+    setIsClientMounted(ref.current);
+  }, []);
 
   if (!isClientMounted) {
     return null;
