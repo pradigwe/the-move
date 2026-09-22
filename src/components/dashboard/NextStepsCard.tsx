@@ -8,16 +8,25 @@ import { ChangeEvent, useState } from "react";
 export default function NextStepsCard() {
   const { user, getDaysToMove, updateMoveTask } = useMoveData();
 
-  const [currentSection] = useState<MoveSection>(
+  const getSection = () => {
     // gets current section id using days until move
-    user.movePlan.sections
-      .filter((section) => section.timeframe <= getDaysToMove())
-      // reduce function compares prev value to current value within an array,
-      // eventually returning one object
-      .reduce((a, b) => (a.timeframe > b.timeframe ? a : b)),
-  );
+    const sections = user.movePlan.sections.filter(
+      (section) => section.timeframe <= getDaysToMove(),
+    );
+    if (sections.length === 0 || !sections) {
+      return null;
+    }
+    // reduce function compares prev value to current value within an array,
+    // eventually returning one object
+    return sections.reduce((a, b) => (a.timeframe > b.timeframe ? a : b));
+  };
+
+  const [currentSection] = useState<MoveSection | null>(getSection());
 
   const getTasks = () => {
+    if (currentSection === null) {
+      return null;
+    }
     const tasksArray = currentSection.tasks.filter((task) => !task.completed);
     if (tasksArray.length < 2) {
       if (tasksArray.length == 0) {
@@ -46,6 +55,9 @@ export default function NextStepsCard() {
     taskId: string,
     taskTitle: string,
   ) => {
+    if (!currentSection) {
+      return;
+    }
     updateMoveTask(currentSection.id, taskId, {
       id: taskId,
       title: taskTitle,
@@ -88,7 +100,7 @@ export default function NextStepsCard() {
         )}
       </div>
       <div>
-        <p>{currentSection.title}</p>
+        <p>{currentSection ? currentSection.title : "Null"}</p>
         <Link href="/plan">
           <Button variant="contained">Navigate</Button>
         </Link>
