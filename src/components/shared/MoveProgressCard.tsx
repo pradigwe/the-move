@@ -8,15 +8,21 @@ type MoveProgressCardProp = {
 };
 
 export default function MoveProgressCard({ type }: MoveProgressCardProp) {
-  const { user } = useMoveData();
+  const { user, getDaysToMove, getMoveProgress } = useMoveData();
   return type === "savings" ? (
     <div className="flex">
-      <Box sx={{ position: "relative", display: "inline-flex" }}>
+      <Box
+        sx={{
+          position: "relative",
+          display: "inline-flex",
+        }}
+      >
         <CircularProgress
           enableTrackSlot
           variant="determinate"
           value={user.savings.progress}
           size={128}
+          className="-scale-x-100"
         />
         <Box
           sx={{
@@ -49,6 +55,47 @@ export default function MoveProgressCard({ type }: MoveProgressCardProp) {
       </div>
     </div>
   ) : (
-    <div></div>
+    <div>
+      <div>
+        <Box
+          sx={{
+            position: "relative",
+            display: "inline-flex",
+          }}
+        >
+          <CircularProgress
+            enableTrackSlot
+            variant="determinate"
+            value={getMoveProgress()}
+            size={128}
+            min={0}
+            max={100}
+            className="-scale-x-100"
+          />
+          <Box
+            sx={{
+              top: 0,
+              left: 0,
+              bottom: 0,
+              right: 0,
+              position: "absolute",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Typography
+              variant="caption"
+              component="div"
+            >{`${getMoveProgress()}%`}</Typography>
+          </Box>
+        </Box>
+        <p>Progress</p>
+      </div>
+      <div>
+        <h3>{getDaysToMove()}</h3>
+        <p>Days Till Move In</p>
+      </div>
+    </div>
   );
 }

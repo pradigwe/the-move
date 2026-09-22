@@ -4,6 +4,7 @@ export type MoveDataTypes = {
   deleteUser: () => void;
   setSavingsGoal: (property: "total", amount: number) => void;
   updateSavingsProgress: (amount?: number) => void;
+  getMoveProgress: () => number;
   updateChecklist: (updatedItem: ChecklistItem) => void;
   addChecklistItem: (
     name: string,
@@ -33,14 +34,7 @@ export type ChecklistItem = {
   id: string;
   name: string;
 
-  category:
-    | "furniture"
-    | "kitchen"
-    | "bathroom"
-    | "cleaning"
-    | "home_essentials"
-    | "decor"
-    | "miscellaneous";
+  category: ChecklistItemCategories;
   // 0 is undefined
   importance: 1 | 2 | 3 | 0;
 

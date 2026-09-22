@@ -15,7 +15,7 @@ import {
 } from "@/types/move";
 import { MoveOnboardingContext } from "@/types/onboarding";
 import { useOnboarding } from "@onboardjs/react";
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useEffectEvent, useState } from "react";
 
 export const MoveDataContext = createContext<MoveDataTypes | undefined>(
   undefined,
@@ -123,6 +123,31 @@ export default function MoveDataProvider({
     } catch (error) {
       console.log("UPDATE SAVINGS ERROR:", error);
     }
+  };
+
+  const getMoveProgress = () => {
+    const savingsProgress = user.savings.progress;
+    const checklistProgress = () => {
+      const totalNum = user.checklist.length;
+      const currentNum = user.checklist.filter((item) => item.purchased).length;
+      return Math.round((currentNum / totalNum) * 100);
+    };
+    const planProgress = () => {
+      let totalNum = 0;
+      let currentNum = 0;
+      user.movePlan.sections.forEach((section) =>
+        section.tasks.forEach((task) => {
+          if (task.completed) {
+            currentNum++;
+          }
+          totalNum++;
+        }),
+      );
+      return Math.round((currentNum / totalNum) * 100);
+    };
+    return Math.round(
+      (savingsProgress + checklistProgress() + planProgress()) / 3,
+    );
   };
 
   const createChecklist = () => {
@@ -292,6 +317,16 @@ export default function MoveDataProvider({
     }
   };
 
+  // checks if client is mounted before returning any data
+  const [isClientMounted, setIsClientMounted] = useState<boolean>(false);
+  useEffectEvent(() => {
+    setIsClientMounted(true);
+  });
+
+  if (!isClientMounted) {
+    return null;
+  }
+
   return (
     <MoveDataContext
       value={{
@@ -300,6 +335,7 @@ export default function MoveDataProvider({
         deleteUser,
         setSavingsGoal,
         updateSavingsProgress,
+        getMoveProgress,
         updateChecklist,
         addChecklistItem,
         deleteChecklistItem,
