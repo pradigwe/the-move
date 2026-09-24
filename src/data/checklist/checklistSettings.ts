@@ -1,3 +1,4 @@
+import RenderPurchaseStatus from "@/components/checklist/PurchaseStatus";
 import InputNumberInterval from "@/lib/checklist/MultiValueOpertor";
 import { ChecklistItem } from "@/types/move";
 import { GridColDef, GridFilterOperator } from "@mui/x-data-grid";
@@ -28,15 +29,16 @@ const priceOperator: GridFilterOperator<ChecklistItem, number>[] = [
 export const checklistCols: GridColDef<ChecklistItem>[] = [
   {
     field: "purchased",
-    headerName: "✔",
-    type: "boolean",
-    flex: 0.2,
-    editable: true,
+    headerName: "Status",
+    renderCell: RenderPurchaseStatus,
+    flex: 0.7,
+    valueGetter: (value, row) => row,
     resizable: false,
     sortable: false,
     hideable: false,
     filterable: false,
-  },
+    editable: false,
+  } as GridColDef<ChecklistItem>,
   {
     field: "name",
     headerName: "Name",

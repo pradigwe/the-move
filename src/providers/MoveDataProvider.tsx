@@ -46,6 +46,8 @@ export default function MoveDataProvider({
     const saved = localStorage.getItem("user");
     return saved ? JSON.parse(saved) : defaultUser;
   });
+  const [isClientMounted, setIsClientMounted] = useState<boolean>(false);
+  const ref = useRef(true);
 
   // updates local storage every time there is a change in user
   useEffect(() => {
@@ -324,9 +326,6 @@ export default function MoveDataProvider({
   };
 
   // checks if client is mounted before returning any data
-  const [isClientMounted, setIsClientMounted] = useState<boolean>(false);
-  const ref = useRef(true);
-
   useLayoutEffect(() => {
     setIsClientMounted(ref.current);
   }, []);
